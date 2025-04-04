@@ -30,24 +30,36 @@ router.post("/", async (req, res) => {
     res.json(newUser)
 })
 
-// UPDATE USER BY ID
-router.put("/", async (req, res) => {
+// TODO UPDATE USER BY ID
+router.put("/:id", async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ message: "user not found"});
+        }
+        res.json({
+            message: "you have updated a user",
+            user: updatedUser
+        });
+    } catch (error) {
+        res.status(500).json({ message: "error updating user", error});
+    }
+});
 
-    // User.findByIdAndUpdate()
-    
-    res.json({
-        message: "You have updated a user!"
-    })
-})
-
-// DELETE USER BY ID
-router.delete("/", async (req, res) => {
-
-    // User.findByIdAndDelete??
-    
-    res.json({
-        message: "You have deleted a user!"
-    })
-})
+// TODO DELETE USER BY ID
+router.delete("/:id", async (req, res) => {
+    try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        if (!deletedUser) {
+            return res.status(404).json({ message: "user not found" });
+        }
+        res.json ({
+            message: "you have deleted a user",
+            user: deletedUser
+        });
+    } catch (error) {
+        res.status(500).json ({ message: "error deleting user", error});
+    }
+});
 
 export default router;
