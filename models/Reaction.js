@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema } from "mongoose";
 
 const reactionSchema = new Schema({
     reactionId: {
@@ -20,9 +20,6 @@ const reactionSchema = new Schema({
         get: (timestamp) => new Date(timestamp).toLocaleString()
     }
 });
-
-const Reaction = model("Reaction", reactionSchema);
-
 
 export default Reaction;
 
