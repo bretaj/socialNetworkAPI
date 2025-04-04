@@ -9,13 +9,17 @@ const thoughtSchema = new Schema(
             maxlength: 280
         },
         createdAt: {
-            type: Date, 
+            type: Date,
             default: Date.now,
             get: function (timestamp) {
                 return new Date(timestamp).toLocaleString();
-            } 
+            }
         },
-
+        username: {
+            type: String,
+            required: true
+        },
+        reactions: []
     },
     {
         toJSON: { getters: true },
