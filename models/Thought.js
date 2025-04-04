@@ -19,7 +19,7 @@ const thoughtSchema = new Schema(
             type: String,
             required: true
         },
-        reactions: []
+        reactions: [reactionSchema]
     },
     {
         toJSON: { getters: true },
@@ -29,6 +29,6 @@ const thoughtSchema = new Schema(
 
 
 
-const Thoughts = model("Thoughts", thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
-export default Thoughts;
+export default Thought;
