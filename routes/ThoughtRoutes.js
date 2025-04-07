@@ -91,7 +91,7 @@ router.post("/:thoughtId/reactions", async (req, res) => {
 
 
 // // REMOVE REACTION
-// TODO figureout where to put reactionId   
+// TODO: FIGURE OUT IF THIS IS ACTUALLY HOW THIS IS SUPPOSED TO WORK 
 router.delete("/:thoughtId/reactions/:reactionId", async (req, res) => {
 
     try {
@@ -99,7 +99,7 @@ router.delete("/:thoughtId/reactions/:reactionId", async (req, res) => {
             req.params.thoughtId,
             {
                 $pull: {
-                    reactions: { reactionId: req.body.reactionId }
+                    reactions: { reactionId: req.body }
                 }
             },
             { new: true }
