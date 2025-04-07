@@ -91,14 +91,15 @@ router.post("/:thoughtId/reactions", async (req, res) => {
 
 
 // // REMOVE REACTION
-router.delete("/:thoughtId/reactions", async (req, res) => {
+// TODO figureout where to put reactionId   
+router.delete("/:thoughtId/reactions/:reactionId", async (req, res) => {
 
     try {
         const updatedThought = await Thought.findByIdAndUpdate(
             req.params.thoughtId,
             {
                 $pull: {
-                    reactions: req.body
+                    reactions: { reactionId: req.body.reactionId }
                 }
             },
             { new: true }
@@ -108,7 +109,7 @@ router.delete("/:thoughtId/reactions", async (req, res) => {
         }
         res.json({
             message: "you have updated a reaction",
-            user: updatedThought
+            thought: updatedThought
         });
     } catch (error) {
         res.status(500).json({ message: "error updating reaction", error });
