@@ -21,5 +21,5 @@ const reactionSchema = new Schema({
     }
 });
 
-export default Reaction;
+export default reactionSchema;
 

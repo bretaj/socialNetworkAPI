@@ -4,7 +4,7 @@ import User from "../models/User.js";
 
 // GET ALL USERS
 router.get("/", async (req, res) => {
-    const users = await User.find();
+    const users = await User.find().populate("friends", "-_id username email");
 
     res.json(users)
 })
@@ -14,7 +14,7 @@ router.get("/:userId", async (req, res) => {
     const targetUserId = req.params.userId;
 
     const user = await User.findById(targetUserId)
-    
+
     res.json(user)
 })
 
@@ -35,14 +35,14 @@ router.put("/:id", async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedUser) {
-            return res.status(404).json({ message: "user not found"});
+            return res.status(404).json({ message: "user not found" });
         }
         res.json({
             message: "you have updated a user",
             user: updatedUser
         });
     } catch (error) {
-        res.status(500).json({ message: "error updating user", error});
+        res.status(500).json({ message: "error updating user", error });
     }
 });
 
@@ -53,13 +53,69 @@ router.delete("/:id", async (req, res) => {
         if (!deletedUser) {
             return res.status(404).json({ message: "user not found" });
         }
-        res.json ({
+        res.json({
             message: "you have deleted a user",
             user: deletedUser
         });
     } catch (error) {
-        res.status(500).json ({ message: "error deleting user", error});
+        res.status(500).json({ message: "error deleting user", error });
     }
 });
+
+
+
+// ADD A FRIEND
+// /api/users/:userId/friends/:friendId
+router.post("/:userId/friends/:friendId", async (req, res) => {
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.userId,
+            {
+                $push: {
+                    friends: req.params.friendId
+                }
+            },
+            { new: true }
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ message: "user not found" });
+        }
+        res.json({
+            message: "you have updated a user",
+            user: updatedUser
+        });
+    } catch (error) {
+        res.status(500).json({ message: "error updating user", error });
+    }
+})
+
+// REMOVE A FRIEND
+// /api/users/:userId/friends/:friendId
+router.delete("/:userId/friends/:friendId", async (req, res) => {
+
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.userId,
+            {
+                $pull: {
+                    friends: req.params.friendId
+                }
+            },
+            { new: true }
+        );
+        if (!updatedUser) {
+            return res.status(404).json({ message: "user not found" });
+        }
+        res.json({
+            message: "you have updated a user",
+            user: updatedUser
+        });
+    } catch (error) {
+        res.status(500).json({ message: "error updating user", error });
+    }
+})
+
+
 
 export default router;
