@@ -91,29 +91,29 @@ router.post("/:thoughtId/reactions", async (req, res) => {
 
 
 // // REMOVE REACTION
-// router.post("/:thoughtId/reactions", async (req, res) => {
+router.delete("/:thoughtId/reactions", async (req, res) => {
 
-//     try {
-//         const updatedThought = await Thought.findByIdAndUpdate(
-//             req.params.thoughtId,
-//             {
-//                 $push: {
-//                     reactions: req.body
-//                 }
-//             },
-//             { new: true }
-//         );
-//         if (!updatedThought) {
-//             return res.status(404).json({ message: "user not found" });
-//         }
-//         res.json({
-//             message: "you have updated a user",
-//             user: updatedThought
-//         });
-//     } catch (error) {
-//         res.status(500).json({ message: "error updating user", error });
-//     }
-// })
+    try {
+        const updatedThought = await Thought.findByIdAndUpdate(
+            req.params.thoughtId,
+            {
+                $pull: {
+                    reactions: req.body
+                }
+            },
+            { new: true }
+        );
+        if (!updatedThought) {
+            return res.status(404).json({ message: "user not found" });
+        }
+        res.json({
+            message: "you have updated a user",
+            user: updatedThought
+        });
+    } catch (error) {
+        res.status(500).json({ message: "error updating user", error });
+    }
+})
 
 
 
