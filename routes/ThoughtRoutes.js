@@ -10,13 +10,13 @@ router.get("/", async (req, res) => {
 })
 
 // GET THOUGHTS BY ID
-// router.get("/:userId", async (req, res) => {
-//     const targetUserId = req.params.userId;
+router.get("/:userId", async (req, res) => {
+    const targetUserId = req.params.userId;
 
-//     const user = await User.findById(targetUserId)
+    const user = await Thought.findById(targetUserId)
     
-//     res.json(user)
-// })
+    res.json(user)
+})
 
 // CREATE NEW THOUGHT
 router.post("/", async (req, res) => {

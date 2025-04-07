@@ -5,7 +5,7 @@ import User from "../models/User.js";
 // GET ALL USERS
 router.get("/", async (req, res) => {
     const users = await User.find().populate("friends", "-_id username email");
-
+// .populate helps get specific with information shown in the route
     res.json(users)
 })
 
