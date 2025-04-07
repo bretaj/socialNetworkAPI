@@ -30,21 +30,21 @@ router.post("/", async (req, res) => {
     res.json(newThought)
 })
 
-// TODO UPDATE USER BY ID
-// router.put("/:id", async (req, res) => {
-//     try {
-//         const updatedThought = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-//         if (!updatedThought) {
-//             return res.status(404).json({ message: "user not found"});
-//         }
-//         res.json({
-//             message: "you have updated a user",
-//             user: updatedThought
-//         });
-//     } catch (error) {
-//         res.status(500).json({ message: "error updating user", error});
-//     }
-// });
+// TODO UPDATE THOUGHT BY ID
+router.put("/:id", async (req, res) => {
+    try {
+        const updatedThought = await Thought.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedThought) {
+            return res.status(404).json({ message: "thought not found"});
+        }
+        res.json({
+            message: "you have updated a thought",
+            user: updatedThought
+        });
+    } catch (error) {
+        res.status(500).json({ message: "error updating user", error});
+    }
+});
 
 // TODO DELETE THOUGHT BY ID
 router.delete("/:id", async (req, res) => {
@@ -77,14 +77,14 @@ router.post("/:thoughtId/reactions", async (req, res) => {
             { new: true }
         );
         if (!updatedThought) {
-            return res.status(404).json({ message: "user not found" });
+            return res.status(404).json({ message: "reaction not found" });
         }
         res.json({
-            message: "you have updated a user",
+            message: "you have updated a reaction",
             user: updatedThought
         });
     } catch (error) {
-        res.status(500).json({ message: "error updating user", error });
+        res.status(500).json({ message: "error updating reaction", error });
     }
 })
 
