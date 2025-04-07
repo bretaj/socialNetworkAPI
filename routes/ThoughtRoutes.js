@@ -10,10 +10,10 @@ router.get("/", async (req, res) => {
 })
 
 // GET THOUGHTS BY ID
-router.get("/:userId", async (req, res) => {
-    const targetUserId = req.params.userId;
+router.get("/:thoughtId", async (req, res) => {
+    const targetThoughtId = req.params.thoughtId;
 
-    const user = await Thought.findById(targetUserId)
+    const user = await Thought.findById(targetThoughtId)
     
     res.json(user)
 })
