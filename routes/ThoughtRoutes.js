@@ -104,14 +104,14 @@ router.delete("/:thoughtId/reactions", async (req, res) => {
             { new: true }
         );
         if (!updatedThought) {
-            return res.status(404).json({ message: "user not found" });
+            return res.status(404).json({ message: "reaction not found" });
         }
         res.json({
-            message: "you have updated a user",
+            message: "you have updated a reaction",
             user: updatedThought
         });
     } catch (error) {
-        res.status(500).json({ message: "error updating user", error });
+        res.status(500).json({ message: "error updating reaction", error });
     }
 })
 
