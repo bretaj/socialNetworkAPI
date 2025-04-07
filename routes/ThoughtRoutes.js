@@ -100,6 +100,7 @@ router.delete("/:thoughtId/reactions/:reactionId", async (req, res) => {
             {
                 $pull: {
                     reactions: { reactionId: req.body }
+                    // { reactionId: req.params.reactionId } why doesn't this seem to work?
                 }
             },
             { new: true }
