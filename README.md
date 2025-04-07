@@ -14,7 +14,7 @@ to start: node server.js
 
 ## Usage
 
-[video of app in action!](#)
+[video of app in action!](https://drive.google.com/file/d/1aVPRxLYmgipeCew027TNOr_G7gKrNavQ/view?usp=sharing)
 
 ## Contributing
 Please create your own branch
